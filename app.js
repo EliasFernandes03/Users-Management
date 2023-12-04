@@ -15,7 +15,7 @@ const pool = mariadb.createPool({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Rota para obter todos os itens
+
 app.get('/users', async (req, res) => {
   let conn;
   try {
@@ -29,7 +29,7 @@ app.get('/users', async (req, res) => {
   }
 });
 
-// Rota para adicionar um novo item
+
 app.post('/users', async (req, res) => {
   const {id,name, email,cpf,endereco } = req.body;
   let conn;
@@ -43,6 +43,24 @@ app.post('/users', async (req, res) => {
     if (conn) conn.release();
   }
 });
+
+app.put('/users/:id',async(req,res)=> {
+  const {id} = req.params;
+  const {name,email,cpf,endereco} = req.body
+  
+  let conn;
+  try{
+    conn = await pool.getConnection();
+    await conn.query(
+      'UPDATE tb_users SET name = ?, email = ?, cpf = ?, endereco = ? WHERE id = ?',
+      [name, email, cpf, endereco, id]
+    );
+    res.status(201).send("Usuario atualizado com suceesso")
+  }
+  catch{
+    res.status(500).send("Usuario não atualizado")
+  }
+})
 
 
 const PORT = 3300; 
