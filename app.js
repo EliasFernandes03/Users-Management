@@ -62,6 +62,21 @@ app.put('/users/:id',async(req,res)=> {
   }
 })
 
+app.delete('/users/:id',async(req,res) => {
+  const {id} = req.params
+  let conn
+  try{
+    conn = await pool.getConnection();
+    await conn.query(
+      'DELETE FROM tb_users WHERE id=?',[id]
+    )
+    res.status(200).send('Usuario deletado com suceesso')
+  }
+  catch{
+    res.status(500).send('ERRO')
+  }
+})
+
 
 const PORT = 3300; 
 app.listen(PORT, () => {
