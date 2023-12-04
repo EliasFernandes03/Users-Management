@@ -1,6 +1,7 @@
 const express = require('express');
 const mariadb = require('mariadb');
 const dotenv = require('dotenv')
+const { v4: uuidv4 } = require('uuid');
 dotenv.config()
 
 
@@ -31,7 +32,9 @@ app.get('/users', async (req, res) => {
 
 
 app.post('/users', async (req, res) => {
-  const {id,name, email,cpf,endereco } = req.body;
+  const id = uuidv4();
+  const {name, email,cpf,endereco } = req.body;
+ 
   let conn;
   try {
     conn = await pool.getConnection();

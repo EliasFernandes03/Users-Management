@@ -1,7 +1,7 @@
 CREATE DATABASE db_users;
 
 CREATE TABLE tb_users (
-    id int,
+    id VARCHAR(255),
     name VARCHAR(255),
     email VARCHAR(255),
     cpf  VARCHAR(255),
