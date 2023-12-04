@@ -3,6 +3,7 @@ const mariadb = require('mariadb');
 const dotenv = require('dotenv')
 dotenv.config()
 
+
 const app = express();
 const pool = mariadb.createPool({
   host: process.env.HOST,
