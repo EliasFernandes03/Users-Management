@@ -2,16 +2,12 @@ const express = require('express');
 const mariadb = require('mariadb');
 const dotenv = require('dotenv')
 const { v4: uuidv4 } = require('uuid');
+const pool = require('./connection')
 dotenv.config()
 
 
 const app = express();
-const pool = mariadb.createPool({
-  host: process.env.HOST,
-  user: process.env.USER,
-  password: process.env.PASSWORD,
-  database: process.env.DATABASE
-});
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
