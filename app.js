@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const userController = require('./controllers/controller');
+const userController = require('./src/controllers/controller');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
